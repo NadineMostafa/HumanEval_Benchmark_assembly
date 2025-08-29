@@ -1,0 +1,113 @@
+	.arch armv8.5-a
+	.build_version macos,  15, 0
+; GNU C11 (Homebrew GCC 15.1.0) version 15.1.0 (aarch64-apple-darwin24)
+;	compiled by GNU C version 15.1.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+
+; GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+; options passed: -fPIC -mmacosx-version-min=15.0.0 -mcpu=apple-m1 -mlittle-endian -mabi=lp64 -O2 -std=c11
+	.text
+	.align	2
+	.p2align 5,,15
+	.globl _func0
+_func0:
+LFB4:
+	stp	x29, x30, [sp, -32]!	;,,,
+LCFI0:
+	mov	x29, sp	;,
+LCFI1:
+	str	x19, [sp, 16]	;,
+LCFI2:
+; GuessSketchFlow/eval/problem107/code.c:4: int* func0(int n) {
+	mov	w19, w0	; n, n
+; GuessSketchFlow/eval/problem107/code.c:5:     int* out = (int*)malloc(n * sizeof(int));
+	sbfiz	x0, x0, 2, 32	;, n,,
+	bl	_malloc		;
+; GuessSketchFlow/eval/problem107/code.c:7:     for (int i = 1; i <= n; i++) {
+	cmp	w19, 0	; n,
+	ble	L1		;,
+	mov	x1, 1	; ivtmp.8,
+; GuessSketchFlow/eval/problem107/code.c:6:     int sum = 0, prod = 1;
+	mov	w2, 0	; sum,
+; GuessSketchFlow/eval/problem107/code.c:6:     int sum = 0, prod = 1;
+	mov	w3, w1	; prod, ivtmp.8
+	sub	x5, x0, #4	; _33, <retval>,
+	.p2align 5,,15
+L2:
+; GuessSketchFlow/eval/problem107/code.c:9:         prod *= i;
+	mul	w3, w3, w1	; prod, prod, ivtmp.8
+; GuessSketchFlow/eval/problem107/code.c:8:         sum += i;
+	add	w2, w2, w1	; sum, sum, ivtmp.8
+	tst	x1, 1	; ivtmp.8,
+	csel	w4, w3, w2, eq	; _36, prod, sum,
+; GuessSketchFlow/eval/problem107/code.c:10:         if (i % 2 == 0) out[i - 1] = prod;
+	str	w4, [x5, x1, lsl 2]	; _36, MEM[(int *)_33 + ivtmp.8_30 * 4]
+; GuessSketchFlow/eval/problem107/code.c:7:     for (int i = 1; i <= n; i++) {
+	add	x1, x1, 1	; ivtmp.8, ivtmp.8,
+	cmp	w19, w1	; n, ivtmp.8
+	bge	L2		;,
+L1:
+; GuessSketchFlow/eval/problem107/code.c:14: }
+	ldr	x19, [sp, 16]	;,
+	ldp	x29, x30, [sp], 32	;,,,
+LCFI3:
+	ret	
+LFE4:
+	.section __TEXT,__eh_frame,coalesced,no_toc+strip_static_syms+live_support
+EH_frame1:
+	.set L$set$0,LECIE1-LSCIE1
+	.long L$set$0
+LSCIE1:
+	.long	0
+	.byte	0x3
+	.ascii "zR\0"
+	.uleb128 0x1
+	.sleb128 -8
+	.uleb128 0x1e
+	.uleb128 0x1
+	.byte	0x10
+	.byte	0xc
+	.uleb128 0x1f
+	.uleb128 0
+	.align	3
+LECIE1:
+LSFDE1:
+	.set L$set$1,LEFDE1-LASFDE1
+	.long L$set$1
+LASFDE1:
+	.long	LASFDE1-EH_frame1
+	.quad	LFB4-.
+	.set L$set$2,LFE4-LFB4
+	.quad L$set$2
+	.uleb128 0
+	.byte	0x4
+	.set L$set$3,LCFI0-LFB4
+	.long L$set$3
+	.byte	0xe
+	.uleb128 0x20
+	.byte	0x9d
+	.uleb128 0x4
+	.byte	0x9e
+	.uleb128 0x3
+	.byte	0x4
+	.set L$set$4,LCFI1-LCFI0
+	.long L$set$4
+	.byte	0xd
+	.uleb128 0x1d
+	.byte	0x4
+	.set L$set$5,LCFI2-LCFI1
+	.long L$set$5
+	.byte	0x93
+	.uleb128 0x2
+	.byte	0x4
+	.set L$set$6,LCFI3-LCFI2
+	.long L$set$6
+	.byte	0xde
+	.byte	0xdd
+	.byte	0xd3
+	.byte	0xc
+	.uleb128 0x1f
+	.uleb128 0
+	.align	3
+LEFDE1:
+	.ident	"GCC: (Homebrew GCC 15.1.0) 15.1.0"
+	.subsections_via_symbols
